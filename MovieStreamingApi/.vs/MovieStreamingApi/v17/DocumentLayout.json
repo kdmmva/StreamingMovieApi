@@ -7,16 +7,12 @@
       "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\services\\movieservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\data\\responces\\moviesresponce.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\data\\responces\\moviesresponce.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\endpoints\\movieendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\endpoints\\movieendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,12 +23,16 @@
       "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\data\\models\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\data\\responces\\moviesresponce.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\data\\responces\\moviesresponce.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\endpoints\\movieendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\endpoints\\movieendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\bayra_zk57\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +42,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "MoviesResponce.cs",
               "DocumentMoniker": "C:\\Users\\Bayra_zk57\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Data\\Responces\\MoviesResponce.cs",
               "RelativeDocumentMoniker": "MovieStreamingApi\\Data\\Responces\\MoviesResponce.cs",
@@ -58,7 +70,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "MovieEndpoints.cs",
               "DocumentMoniker": "C:\\Users\\Bayra_zk57\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Endpoints\\MovieEndpoints.cs",
               "RelativeDocumentMoniker": "MovieStreamingApi\\Endpoints\\MovieEndpoints.cs",
@@ -76,14 +88,14 @@
               "RelativeDocumentMoniker": "MovieStreamingApi\\Services\\MovieService.cs",
               "ToolTip": "C:\\Users\\Bayra_zk57\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Services\\MovieService.cs",
               "RelativeToolTip": "MovieStreamingApi\\Services\\MovieService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAABFAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwBIAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-24T08:27:52.819Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Bayra_zk57\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Program.cs",
               "RelativeDocumentMoniker": "MovieStreamingApi\\Program.cs",
@@ -91,12 +103,11 @@
               "RelativeToolTip": "MovieStreamingApi\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T08:27:52.822Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-24T08:27:52.822Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Movie.cs",
               "DocumentMoniker": "C:\\Users\\Bayra_zk57\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Data\\Models\\Movie.cs",
               "RelativeDocumentMoniker": "MovieStreamingApi\\Data\\Models\\Movie.cs",
@@ -108,7 +119,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Bayra_zk57\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\appsettings.json",
               "RelativeDocumentMoniker": "MovieStreamingApi\\appsettings.json",
@@ -116,12 +127,11 @@
               "RelativeToolTip": "MovieStreamingApi\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-24T08:27:52.829Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-24T08:27:52.829Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": ".gitignore",
               "DocumentMoniker": "C:\\Users\\Bayra_zk57\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\.gitignore",
               "RelativeDocumentMoniker": "MovieStreamingApi\\.gitignore",
@@ -129,12 +139,11 @@
               "RelativeToolTip": "MovieStreamingApi\\.gitignore",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-11-24T08:27:52.832Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-24T08:27:52.832Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\Bayra_zk57\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "MovieStreamingApi\\Properties\\launchSettings.json",
@@ -142,24 +151,11 @@
               "RelativeToolTip": "MovieStreamingApi\\Properties\\launchSettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAABGAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-24T08:27:52.835Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-24T08:27:52.835Z"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
             }
           ]
         },

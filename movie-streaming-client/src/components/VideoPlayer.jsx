@@ -1,7 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ReactPlayer from 'react-player';
-import { FaPlay, FaPause, FaForward, FaBackward, FaVolumeUp, FaVolumeMute, FaSpinner, FaExpand } from 'react-icons/fa';
+import {
+    FaPlay,
+    FaPause,
+    FaForward,
+    FaBackward,
+    FaVolumeUp,
+    FaVolumeMute,
+    FaSpinner,
+    FaExpand
+} from 'react-icons/fa';
 
 const VideoPlayer = () => {
     const location = useLocation();
@@ -39,7 +48,7 @@ const VideoPlayer = () => {
             if (!playerRef.current) return;
 
             if (event.key === ' ') {
-                event.preventDefault(); 
+                event.preventDefault();
                 togglePlay();
             } else if (event.key === 'ArrowRight') {
                 handleFastForward();
@@ -65,6 +74,12 @@ const VideoPlayer = () => {
 
     const togglePlay = () => setPlaying((prev) => !prev);
     const toggleMute = () => setMuted((prev) => !prev);
+
+    const handleVolumeChange = (e) => {
+        const newVolume = parseFloat(e.target.value);
+        setVolume(newVolume);
+        setMuted(newVolume === 0);
+    };
 
     const handleProgressClick = (e) => {
         const rect = e.target.getBoundingClientRect();
@@ -166,6 +181,16 @@ const VideoPlayer = () => {
                     <button onClick={toggleMute} className="text-2xl hover:text-red-500 transition">
                         {muted ? <FaVolumeMute /> : <FaVolumeUp />}
                     </button>
+
+                    <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        value={volume}
+                        onChange={handleVolumeChange}
+                        className="w-24"
+                    />
                 </div>
 
                 <select
