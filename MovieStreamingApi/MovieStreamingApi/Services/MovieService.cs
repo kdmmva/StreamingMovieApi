@@ -8,7 +8,7 @@ namespace MovieStreamingApi.Services
     {
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
-        private const string BaseImageUrl = "https://image.tmdb.org/t/p/w700"; 
+        private const string BaseImageUrl = "https://image.tmdb.org/t/p/w780"; 
 
         public MovieService(HttpClient httpClient, IConfiguration configuration)
         {
