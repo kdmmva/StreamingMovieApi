@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\MovieStreamingApi",
+    "\\MovieStreamingApi\\Endpoints",
+    "\\MovieStreamingApi\\Services"
+  ],
+  "SelectedNode": "\\MovieStreamingApi\\Services\\MovieService.cs",
+  "PreviewInSolutionExplorer": false
+}
