@@ -42,27 +42,57 @@ def get_film_stream(film_name):
 
         rezka = HdRezkaApi(url)
 
+        available_translators = rezka.translators
+        if "Дубляж" not in available_translators:
+            return {"status": "error", "message": "Translator 'Дубляж' not found"}
+
+        current_translator1 = "Дубляж"
+
         qualities = ["360p", "480p", "720p", "1080p", "1080p Ultra"]
-        stream_urls = {}
+        stream_urls1 = {}
 
         for quality in qualities:
-            stream_url = rezka.getStream()(quality)
-            if stream_url:
-                stream_urls[quality] = stream_url
+            try:
+                stream_url = rezka.getStream(translation=current_translator1)(quality)
+                if stream_url:
+                    stream_urls1[quality] = stream_url
+            except Exception as e:
+                print(f"Error fetching quality {quality}: {e}")
+                continue
 
-        if len(stream_urls) < len(qualities):
-            missing_qualities = set(qualities) - set(stream_urls.keys())
-            return {
-                "status": "error",
-                "message": f"Not all qualities available. Missing: {', '.join(missing_qualities)}",
-            }
+        if not stream_urls1:
+            return {"status": "error", "message": "No streams available"}
 
-        return {"status": "success", "stream_urls": stream_urls}
+        if "Оригинал (+субтитры)" not in available_translators:
+            return {"status": "error", "message": "Translator 'Оригинал (+субтитры)' not found"}
+
+        current_translator2 = "Оригинал (+субтитры)"
+        stream_urls2 = {}
+
+        for quality in qualities:
+            try:
+                stream_url = rezka.getStream(translation=current_translator2)(quality)
+                if stream_url:
+                    stream_urls2[quality] = stream_url
+            except Exception as e:
+                print(f"Error fetching quality {quality}: {e}")
+                continue
+
+        if not stream_urls2:
+            return {"status": "error", "message": "No streams available"}
+
+        return {
+            "status": "success",
+            "stream_urls1": stream_urls1,
+            "translator1": current_translator1,
+            "stream_urls2": stream_urls2,
+            "translator2": current_translator2
+        }
 
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
 
-# film_name = "The Substance"
-# urls = get_film_stream(film_name)
-# print(urls)
+film_name = "The Substance"
+urls = get_film_stream(film_name)
+print(urls)

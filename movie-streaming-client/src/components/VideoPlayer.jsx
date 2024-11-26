@@ -18,16 +18,20 @@ const VideoPlayer = () => {
 
     const movieTitle = location.state?.movie?.title || 'Unknown Movie';
     const movieStreamUrls = location.state?.movie?.stream_urls || {};
+    const movieAudioTracks = location.state?.movie?.audio_tracks || {
+        russian: movieStreamUrls['russian'],
+        original: movieStreamUrls['original']
+    };
 
     const [videoSource, setVideoSource] = useState('');
     const [selectedQuality, setSelectedQuality] = useState('');
+    const [selectedAudio, setSelectedAudio] = useState('russian');
     const [loading, setLoading] = useState(true);
     const [playing, setPlaying] = useState(true);
     const [volume, setVolume] = useState(0.8);
     const [muted, setMuted] = useState(false);
     const [progress, setProgress] = useState(0);
     const [playbackRate, setPlaybackRate] = useState(1);
-
     const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
@@ -44,31 +48,22 @@ const VideoPlayer = () => {
     }, [movieStreamUrls]);
 
     useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (!playerRef.current) return;
-
-            if (event.key === ' ') {
-                event.preventDefault();
-                togglePlay();
-            } else if (event.key === 'ArrowRight') {
-                handleFastForward();
-            } else if (event.key === 'ArrowLeft') {
-                handleRewind();
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, []);
+        if (movieAudioTracks[selectedAudio]) {
+            setVideoSource(movieAudioTracks[selectedAudio]);
+        }
+    }, [selectedAudio, movieAudioTracks]);
 
     const handleQualityChange = (quality) => {
         if (movieStreamUrls[quality]) {
             setVideoSource(movieStreamUrls[quality]);
             setSelectedQuality(quality);
             localStorage.setItem('selectedQuality', quality);
+        }
+    };
+
+    const handleAudioChange = (audio) => {
+        if (movieAudioTracks[audio]) {
+            setSelectedAudio(audio);
         }
     };
 
@@ -105,20 +100,6 @@ const VideoPlayer = () => {
         setPlaybackRate(rate);
     };
 
-    const handleDragStart = (e) => {
-        setIsDragging(true);
-        handleProgressClick(e);
-    };
-
-    const handleDragEnd = () => {
-        setIsDragging(false);
-    };
-
-    const handleDrag = (e) => {
-        if (!isDragging) return;
-        handleProgressClick(e);
-    };
-
     return (
         <div className="relative bg-black rounded-lg overflow-hidden max-w-4xl mx-auto shadow-lg">
             <div className="absolute top-0 left-0 right-0 bg-black bg-opacity-80 text-white p-3 text-lg flex justify-between items-center">
@@ -148,9 +129,7 @@ const VideoPlayer = () => {
 
             <div
                 className="absolute bottom-14 left-0 right-0 h-3 bg-gray-800 rounded-full cursor-pointer transition-all duration-300 hover:h-5"
-                onMouseDown={handleDragStart}
-                onMouseUp={handleDragEnd}
-                onMouseMove={handleDrag}
+                onMouseDown={handleProgressClick}
             >
                 <div
                     className="h-full bg-gradient-to-r from-red-500 to-yellow-500 rounded-full"
@@ -160,10 +139,7 @@ const VideoPlayer = () => {
 
             <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-90 text-white p-4 flex justify-between items-center">
                 <div className="flex items-center gap-4">
-                    <button
-                        onClick={handleRewind}
-                        className="text-2xl hover:text-red-500 transition"
-                    >
+                    <button onClick={handleRewind} className="text-2xl hover:text-red-500 transition">
                         <FaBackward />
                     </button>
 
@@ -213,6 +189,18 @@ const VideoPlayer = () => {
                     {Object.keys(movieStreamUrls).map((quality) => (
                         <option key={quality} value={quality}>
                             {quality}
+                        </option>
+                    ))}
+                </select>
+
+                <select
+                    value={selectedAudio}
+                    onChange={(e) => handleAudioChange(e.target.value)}
+                    className="bg-gray-800 text-white rounded-md px-2 py-1"
+                >
+                    {Object.keys(movieAudioTracks).map((track) => (
+                        <option key={track} value={track}>
+                            {track === 'russian' ? 'Русская озвучка' : 'Оригинал + субтитры'}
                         </option>
                     ))}
                 </select>
