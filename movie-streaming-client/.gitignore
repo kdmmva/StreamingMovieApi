@@ -21,3 +21,17 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Temporary runtime files
+*.log
+*.pid
+*.pid.lock
+tmp/
+
+# Node.js runtime files
+/node_modules
+.env*
+
+# Framework-specific temporary files
+/.next
+/.cache

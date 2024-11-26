@@ -6,3 +6,51 @@
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# User-specific files
+.idea/
+.idea/*
+
+# Exclude workspace-specific files (keep shared settings if needed)
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/vcs.xml
+.idea/shelf/
+
+# Ignore HTTP client requests
+httpRequests/
+
+# Local run configurations
+.idea/runConfigurations/
+
+# Datasource local storage files
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/gradle.xml
+.idea/libraries/
+
+# Logs
+*.log
+
+# Virtual Environment
+venv/
+env/
+
+# Byte-compiled Python files
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Temporary files
+*.swp
+*.swo
+*.swn
+
+# OS-specific files
+.DS_Store
+Thumbs.db
