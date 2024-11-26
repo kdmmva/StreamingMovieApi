@@ -27,25 +27,25 @@ const MovieSearch = () => {
             const response = await axios.post('http://localhost:5000/generate-movie-url', {
                 title: movie.title,
             });
-            console.log('Movie click response:', response.data);
-
-            if (response.data && response.data.stream_urls) {
-                const streamUrls = response.data.stream_urls;
-
+    
+            if (response.data && response.data.streams) {
+                const streams = response.data.streams; 
+                console.log("Stream URLs for movie:", movie.title, streams);
+    
                 navigate(`/movies/${movie.id}`, {
                     state: {
                         movie: {
                             ...movie,
-                            stream_urls: streamUrls,
+                            streams, 
                         },
                     },
                 });
             } else {
-                console.error('Stream URLs missing in response:', response.data);
-                setError(new Error('No stream URLs received from server.'));
+                console.error('Stream data missing in response:', response.data);
+                setError(new Error('No stream data received from server.'));
             }
         } catch (err) {
-            console.error('Error handling movie click:', err);
+            console.error('Error fetching movie stream data:', err);
             setError(err);
         }
     };
