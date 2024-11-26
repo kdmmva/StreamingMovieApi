@@ -33,7 +33,6 @@ def get_film_url(film_name):
         print("Film not found.")
         return None
 
-
 def get_film_stream(film_name):
     try:
         url = get_film_url(film_name)

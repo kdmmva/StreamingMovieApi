@@ -19,10 +19,22 @@ def generate_movie_url():
         if result["status"] == "error":
             return jsonify({"error": result["message"]}), 400
 
-        return jsonify({"stream_urls": result["stream_urls"]}), 200
+        combined_streams = [
+            {
+                "translator": result["translator1"],
+                "urls": result["stream_urls1"]
+            },
+            {
+                "translator": result["translator2"],
+                "urls": result["stream_urls2"]
+            }
+        ]
+
+        return jsonify({"streams": combined_streams}), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 if __name__ == '__main__':

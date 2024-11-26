@@ -29,32 +29,28 @@ const MoviesList = () => {
                 title: movie.title,
             });
     
-            if (response.data && response.data.stream_urls) {
-                const streamUrls = response.data.stream_urls;
-    
-                console.log("Stream URLs for movie:", movie.title);
-                Object.entries(streamUrls).forEach(([quality, url]) => {
-                    console.log(`${quality}: ${url}`);
-                });
+            if (response.data && response.data.streams) {
+                const streams = response.data.streams; 
+                console.log("Stream URLs for movie:", movie.title, streams);
     
                 navigate(`/movies/${movie.id}`, {
                     state: {
                         movie: {
                             ...movie,
-                            stream_urls: streamUrls,  
+                            streams, 
                         },
                     },
                 });
-    
             } else {
-                console.error('Stream URLs missing in response:', response.data);
-                setError(new Error('No stream URLs received from server.'));
+                console.error('Stream data missing in response:', response.data);
+                setError(new Error('No stream data received from server.'));
             }
         } catch (err) {
-            console.error('Error fetching movie stream URLs:', err);
+            console.error('Error fetching movie stream data:', err);
             setError(err);
         }
     };
+    
 
     const handleModalClose = () => {
         setSelectedMovie(null); 

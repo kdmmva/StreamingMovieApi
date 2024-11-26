@@ -17,15 +17,13 @@ const VideoPlayer = () => {
     const playerRef = useRef(null);
 
     const movieTitle = location.state?.movie?.title || 'Unknown Movie';
-    const movieStreamUrls = location.state?.movie?.stream_urls || {};
-    const movieAudioTracks = location.state?.movie?.audio_tracks || {
-        russian: movieStreamUrls['russian'],
-        original: movieStreamUrls['original']
-    };
+    const streams = location.state?.movie?.streams || [];
 
-    const [videoSource, setVideoSource] = useState('');
+    const [selectedTranslator, setSelectedTranslator] = useState(() => {
+        return localStorage.getItem('selectedTranslator') || streams[0]?.translator || '';
+    });
     const [selectedQuality, setSelectedQuality] = useState('');
-    const [selectedAudio, setSelectedAudio] = useState('russian');
+    const [videoSource, setVideoSource] = useState('');
     const [loading, setLoading] = useState(true);
     const [playing, setPlaying] = useState(true);
     const [volume, setVolume] = useState(0.8);
@@ -34,37 +32,40 @@ const VideoPlayer = () => {
     const [playbackRate, setPlaybackRate] = useState(1);
     const [isDragging, setIsDragging] = useState(false);
 
+    // Обновляем список качеств и устанавливаем источник видео при смене переводчика
     useEffect(() => {
-        if (movieStreamUrls && Object.keys(movieStreamUrls).length > 0) {
-            const lastSelectedQuality = localStorage.getItem('selectedQuality');
-            const defaultQuality =
-                lastSelectedQuality && movieStreamUrls[lastSelectedQuality]
-                    ? lastSelectedQuality
-                    : Object.keys(movieStreamUrls)[0];
+        const currentStream = streams.find((stream) => stream.translator === selectedTranslator);
+        if (currentStream) {
+            const lastSelectedQuality = localStorage.getItem(`selectedQuality_${selectedTranslator}`);
+            const defaultQuality = lastSelectedQuality && currentStream.urls[lastSelectedQuality]
+                ? lastSelectedQuality
+                : Object.keys(currentStream.urls)[0];
 
             setSelectedQuality(defaultQuality);
-            setVideoSource(movieStreamUrls[defaultQuality]);
+            setVideoSource(currentStream.urls[defaultQuality]);
+            console.log(`Translator: ${selectedTranslator}, Default Quality: ${defaultQuality}`);
         }
-    }, [movieStreamUrls]);
+    }, [selectedTranslator, streams]);
 
+    // Обновляем источник видео при смене качества
     useEffect(() => {
-        if (movieAudioTracks[selectedAudio]) {
-            setVideoSource(movieAudioTracks[selectedAudio]);
+        const currentStream = streams.find((stream) => stream.translator === selectedTranslator);
+        if (currentStream && currentStream.urls[selectedQuality]) {
+            setVideoSource(currentStream.urls[selectedQuality]);
+            console.log(`Updated Quality: ${selectedQuality}, Video Source: ${currentStream.urls[selectedQuality]}`);
         }
-    }, [selectedAudio, movieAudioTracks]);
+    }, [selectedQuality, selectedTranslator, streams]);
 
-    const handleQualityChange = (quality) => {
-        if (movieStreamUrls[quality]) {
-            setVideoSource(movieStreamUrls[quality]);
-            setSelectedQuality(quality);
-            localStorage.setItem('selectedQuality', quality);
-        }
+    const handleTranslatorChange = (translator) => {
+        console.log(`Translator changed to: ${translator}`);
+        setSelectedTranslator(translator);
+        localStorage.setItem('selectedTranslator', translator);
     };
 
-    const handleAudioChange = (audio) => {
-        if (movieAudioTracks[audio]) {
-            setSelectedAudio(audio);
-        }
+    const handleQualityChange = (quality) => {
+        console.log(`Quality changed to: ${quality}`);
+        setSelectedQuality(quality);
+        localStorage.setItem(`selectedQuality_${selectedTranslator}`, quality);
     };
 
     const togglePlay = () => setPlaying((prev) => !prev);
@@ -182,27 +183,32 @@ const VideoPlayer = () => {
                 </select>
 
                 <select
-                    value={selectedQuality}
-                    onChange={(e) => handleQualityChange(e.target.value)}
+                    value={selectedTranslator}
+                    onChange={(e) => handleTranslatorChange(e.target.value)}
                     className="bg-gray-800 text-white rounded-md px-2 py-1"
                 >
-                    {Object.keys(movieStreamUrls).map((quality) => (
-                        <option key={quality} value={quality}>
-                            {quality}
+                    {streams.map((stream) => (
+                        <option key={stream.translator} value={stream.translator}>
+                            {stream.translator}
                         </option>
                     ))}
                 </select>
 
                 <select
-                    value={selectedAudio}
-                    onChange={(e) => handleAudioChange(e.target.value)}
+                    value={selectedQuality}
+                    onChange={(e) => handleQualityChange(e.target.value)}
                     className="bg-gray-800 text-white rounded-md px-2 py-1"
                 >
-                    {Object.keys(movieAudioTracks).map((track) => (
-                        <option key={track} value={track}>
-                            {track === 'russian' ? 'Русская озвучка' : 'Оригинал + субтитры'}
-                        </option>
-                    ))}
+                    {streams
+                        .find((stream) => stream.translator === selectedTranslator)
+                        ?.urls &&
+                        Object.keys(
+                            streams.find((stream) => stream.translator === selectedTranslator).urls
+                        ).map((quality) => (
+                            <option key={quality} value={quality}>
+                                {quality}
+                            </option>
+                        ))}
                 </select>
 
                 <button
