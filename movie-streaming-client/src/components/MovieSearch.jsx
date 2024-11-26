@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const MovieSearch = () => {
@@ -6,6 +7,7 @@ const MovieSearch = () => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const navigate = useNavigate();
 
     const handleSearch = async (event) => {
         event.preventDefault();
@@ -17,6 +19,34 @@ const MovieSearch = () => {
         } catch (err) {
             setError(err);
             console.error('Error fetching movies:', err);
+        }
+    };
+
+    const handleMovieClick = async (movie) => {
+        try {
+            const response = await axios.post('http://localhost:5000/generate-movie-url', {
+                title: movie.title,
+            });
+            console.log('Movie click response:', response.data);
+
+            if (response.data && response.data.stream_urls) {
+                const streamUrls = response.data.stream_urls;
+
+                navigate(`/movies/${movie.id}`, {
+                    state: {
+                        movie: {
+                            ...movie,
+                            stream_urls: streamUrls,
+                        },
+                    },
+                });
+            } else {
+                console.error('Stream URLs missing in response:', response.data);
+                setError(new Error('No stream URLs received from server.'));
+            }
+        } catch (err) {
+            console.error('Error handling movie click:', err);
+            setError(err);
         }
     };
 
@@ -66,7 +96,8 @@ const MovieSearch = () => {
                                         {movies.map((movie, index) => (
                                             <li
                                                 key={index}
-                                                className="border-b border-gray-600 pb-2"
+                                                className="border-b border-gray-600 pb-2 cursor-pointer hover:bg-gray-700 p-2 rounded-lg"
+                                                onClick={() => handleMovieClick(movie)}
                                             >
                                                 <h3 className="text-lg font-semibold text-purple-400">
                                                     {movie.title}
