@@ -60,106 +60,110 @@ def get_html_url(object_name):
 
 def get_film_stream(film_name):
     try:
-        url = get_html_url(film_name)
-        if not url:
+        result = get_html_url(film_name)
+        if not result or 'url' not in result:
             return {"status": "error", "message": "URL not found"}
 
+        url = result['url']
         rezka = HdRezkaApi(url)
 
         available_translators = rezka.translators
-        if "Дубляж" not in available_translators:
-            return {"status": "error", "message": "Translator 'Дубляж' not found"}
 
-        current_translator1 = "Дубляж"
+        custom_translators = [
+            "Дубляж",
+            "Оригинал (+субтитры)",
+            "Авторский перевод"
+        ]
+
+        matching_translators = [t for t in custom_translators if t in available_translators]
+
+        if not matching_translators:
+            print("No preferred translators found. Proceeding without specifying a translator.")
+            matching_translators = [None]
 
         qualities = ["360p", "480p", "720p", "1080p", "1080p Ultra"]
-        stream_urls1 = {}
 
-        for quality in qualities:
-            try:
-                stream_url = rezka.getStream(translation=current_translator1)(quality)
-                if stream_url:
-                    stream_urls1[quality] = stream_url
-            except Exception as e:
-                print(f"Error fetching quality {quality}: {e}")
-                continue
+        streams_by_translator = {}
 
-        if not stream_urls1:
-            return {"status": "error", "message": "No streams available"}
+        for translator_name in matching_translators:
+            print(f"Processing translator: {translator_name if translator_name else 'No translator specified'}")
+            stream_urls = {}
 
-        if "Оригинал (+субтитры)" not in available_translators:
-            return {"status": "error", "message": "Translator 'Оригинал (+субтитры)' not found"}
+            for quality in qualities:
+                try:
+                    stream_url = rezka.getStream(translation=translator_name)(quality) if translator_name else rezka.getStream()(quality)
+                    if stream_url:
+                        stream_urls[quality] = stream_url
+                except Exception as e:
+                    print(f"Error fetching quality {quality}: {e}")
+                    continue
 
-        current_translator2 = "Оригинал (+субтитры)"
-        stream_urls2 = {}
+            if stream_urls:
+                streams_by_translator[translator_name if translator_name else "No translator"] = stream_urls
 
-        for quality in qualities:
-            try:
-                stream_url = rezka.getStream(translation=current_translator2)(quality)
-                if stream_url:
-                    stream_urls2[quality] = stream_url
-            except Exception as e:
-                print(f"Error fetching quality {quality}: {e}")
-                continue
-
-        if not stream_urls2:
-            return {"status": "error", "message": "No streams available"}
+        if not streams_by_translator:
+            return {"status": "error", "message": "No streams available for any translator"}
 
         return {
             "status": "success",
-            "stream_urls1": stream_urls1,
-            "translator1": current_translator1,
-            "stream_urls2": stream_urls2,
-            "translator2": current_translator2
+            "streams_by_translator": streams_by_translator
         }
 
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
 
+
 def get_serial_stream(serial_name):
     try:
-        # Получаем URL объекта
         result = get_html_url(serial_name)
         if not result or 'url' not in result:
             return {"status": "error", "message": "URL not found"}
 
         url = result['url']
-
-        # Создаем объект API на основе URL
         rezka = HdRezkaApi(url)
 
         available_translators = rezka.translators
 
-        # Выбираем переводчик
-        translator_name = "Оригинал (+субтитры)"  # Можно заменить на индекс или другой переводчик
-        if translator_name not in available_translators:
-            return {"status": "error", "message": f"Translator '{translator_name}' not found"}
+        custom_translators = [
+            "Дубляж",
+            "Оригинал (+субтитры)",
+            "лостфильм (LostFilm)"
+        ]
+
+        matching_translators = [t for t in custom_translators if t in available_translators]
+
+        if not matching_translators:
+            print("No preferred translators found. Proceeding without specifying a translator.")
+            translator_name = None
+        else:
+            translator_name = matching_translators[0]
+            print(f"Using translator: {translator_name}")
 
         all_season_streams = {}
 
-        # Перебираем сезоны
         season_number = 1
         while True:
             try:
                 print(f"Processing season {season_number}...")
 
-                # Получаем потоки для текущего сезона
                 season_streams_generator = rezka.getSeasonStreams(
                     season=season_number,
                     translation=translator_name,
                     ignore=True,
                     progress=lambda current, total: print(f"Season {season_number} progress: {current}/{total}")
+                ) if translator_name else rezka.getSeasonStreams(
+                    season=season_number,
+                    ignore=True,
+                    progress=lambda current, total: print(f"Season {season_number} progress: {current}/{total}")
                 )
 
-                # Преобразуем генератор в словарь
                 season_streams = dict(season_streams_generator)
 
                 if not season_streams:
                     print(f"No streams found for season {season_number}. Stopping.")
                     break
 
-                # Преобразуем данные потоков в удобный формат
                 all_season_streams[season_number] = {
                     episode: {
                         quality: stream(quality)
@@ -181,7 +185,7 @@ def get_serial_stream(serial_name):
         return {
             "status": "success",
             "type": "Serial",
-            "translator": translator_name,
+            "translator": translator_name if translator_name else "No translator specified",
             "streams": all_season_streams
         }
 
@@ -190,14 +194,17 @@ def get_serial_stream(serial_name):
 
 
 
-# serial_name = "Sans famille / An Orphan's Tale"
+serial_name = "Game of Thrones"
 
-result = get_serial_stream("Game of Thrones")
+result = get_serial_stream(serial_name)
 
-print(result)
+# print(result)
 # film_name = "The Substance"
 # urls = get_film_stream(film_name)
 # print(urls)
 
-result = get_html_url("Sans famille / An Orphan's Tale")
-print(result)
+# result = get_html_url("Sans famille / An Orphan's Tale")
+# print(result)
+
+# film_name = "The Shawshank Redemption"
+# result = get_film_stream(film_name)
