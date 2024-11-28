@@ -88,18 +88,33 @@ def get_film_stream(film_name):
         for translator_name in matching_translators:
             print(f"Processing translator: {translator_name if translator_name else 'No translator specified'}")
             stream_urls = {}
+            subtitles_info = {}
 
             for quality in qualities:
                 try:
-                    stream_url = rezka.getStream(translation=translator_name)(quality) if translator_name else rezka.getStream()(quality)
-                    if stream_url:
-                        stream_urls[quality] = stream_url
+                    # Получаем объект потока
+                    stream = rezka.getStream(translation=translator_name) if translator_name else rezka.getStream()
+                    video_url = stream(quality) if callable(stream) else None
+
+                    if video_url:
+                        stream_urls[quality] = video_url
+
+                        # Проверяем наличие субтитров только для "Оригинал (+субтитры)"
+                        if translator_name == "Оригинал (+субтитры)" and hasattr(stream, "subtitles") and stream.subtitles:
+                            subtitles = stream.subtitles
+                            subtitles_info = {
+                                "keys": subtitles.keys,  # Доступные языки субтитров
+                                "subtitles": subtitles.subtitles,  # Подробная информация о субтитрах
+                            }
                 except Exception as e:
                     print(f"Error fetching quality {quality}: {e}")
                     continue
 
             if stream_urls:
-                streams_by_translator[translator_name if translator_name else "No translator"] = stream_urls
+                streams_by_translator[translator_name if translator_name else "No translator"] = {
+                    "streams": stream_urls,
+                    "subtitles": subtitles_info if translator_name == "Оригинал (+субтитры)" else None
+                }
 
         if not streams_by_translator:
             return {"status": "error", "message": "No streams available for any translator"}
@@ -111,8 +126,6 @@ def get_film_stream(film_name):
 
     except Exception as e:
         return {"status": "error", "message": str(e)}
-
-
 
 def get_serial_stream(serial_name):
     try:
@@ -166,9 +179,19 @@ def get_serial_stream(serial_name):
 
                 all_season_streams[season_number] = {
                     episode: {
-                        quality: stream(quality)
-                        for quality in ["360p", "480p", "720p", "1080p", "1080p Ultra"]
-                        if callable(stream)
+                        "streams": {
+                            quality: stream(quality)
+                            for quality in ["360p", "480p", "720p", "1080p", "1080p Ultra"]
+                            if callable(stream)
+                        },
+                        "subtitles": (
+                            {
+                                "keys": stream.subtitles.keys,
+                                "subtitles": stream.subtitles.subtitles
+                            }
+                            if translator_name == "Оригинал (+субтитры)" and hasattr(stream, "subtitles") and stream.subtitles
+                            else None
+                        )
                     }
                     for episode, stream in season_streams.items()
                 }
@@ -194,14 +217,16 @@ def get_serial_stream(serial_name):
 
 
 
-serial_name = "Game of Thrones"
 
-result = get_serial_stream(serial_name)
+# serial_name = "Game of Thrones"
+#
+# result = get_serial_stream(serial_name)
 
 # print(result)
-# film_name = "The Substance"
-# urls = get_film_stream(film_name)
-# print(urls)
+
+film_name = "The Substance"
+urls = get_film_stream(film_name)
+print(urls)
 
 # result = get_html_url("Sans famille / An Orphan's Tale")
 # print(result)
