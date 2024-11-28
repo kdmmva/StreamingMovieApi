@@ -32,7 +32,6 @@ const VideoPlayer = () => {
     const [playbackRate, setPlaybackRate] = useState(1);
     const [isDragging, setIsDragging] = useState(false);
 
-    // Обновляем список качеств и устанавливаем источник видео при смене переводчика
     useEffect(() => {
         const currentStream = streams.find((stream) => stream.translator === selectedTranslator);
         if (currentStream) {
@@ -47,7 +46,7 @@ const VideoPlayer = () => {
         }
     }, [selectedTranslator, streams]);
 
-    // Обновляем источник видео при смене качества
+
     useEffect(() => {
         const currentStream = streams.find((stream) => stream.translator === selectedTranslator);
         if (currentStream && currentStream.urls[selectedQuality]) {

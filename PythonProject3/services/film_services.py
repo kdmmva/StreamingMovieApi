@@ -1,41 +1,85 @@
+from idlelib.rpc import objecttable
+
 import requests
 from bs4 import BeautifulSoup
 from urllib.parse import quote_plus
 from HdRezkaApi import *
 import json
 
-def get_film_url(film_name):
-    query = quote_plus(film_name)
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import quote_plus
+
+
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import quote_plus
+
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import quote_plus
+
+import requests
+from bs4 import BeautifulSoup
+from urllib.parse import quote_plus
+
+def get_html_url(object_name):
+    query = quote_plus(object_name)
     search_url = f'https://rezka.ag/search/?do=search&subaction=search&q={query}'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     }
 
     response = requests.get(search_url, headers=headers)
-
     if response.status_code != 200:
         print(f"Error: {response.status_code}")
         return None
 
     soup = BeautifulSoup(response.text, 'html.parser')
-    film_item = soup.find('div', class_='b-content__inline_item')
+    object_item = soup.find('div', class_='b-content__inline_item')
 
-    if film_item:
-        film_url = film_item.find('a')['href']
+    if object_item:
+        obj_url = object_item.find('a')['href']
 
-        film_response = requests.get(film_url, headers=headers)
-        if film_response.status_code == 200:
-            return film_url
+        object_response = requests.get(obj_url, headers=headers)
+        if object_response.status_code == 200:
+            object_soup = BeautifulSoup(object_response.text, 'html.parser')
+
+            is_serial = False
+
+            season_info = object_soup.find('div', class_='b-simple_episodes__title')
+            if season_info and 'сезон' in season_info.get_text(strip=True).lower():
+                is_serial = True
+
+            episodes_list = object_soup.find('div', class_='b-simple_episodes__list')
+            if episodes_list:
+                is_serial = True
+
+            duration_info = object_soup.find('div', class_='b-post__info')
+            if duration_info:
+                duration_text = duration_info.get_text(strip=True).lower()
+                if 'мин' in duration_text and 'серий' in duration_text:
+                    is_serial = True
+
+            additional_info = object_soup.get_text(strip=True).lower()
+            if 'эпизод' in additional_info or 'серия' in additional_info:
+                is_serial = True
+
+            obj_type = 'Serial' if is_serial else 'Movie'
+            return {
+                'url': obj_url,
+                'type': obj_type
+            }
         else:
-            print(f"Film is not accessible. Status code: {film_response.status_code}")
+            print(f"Object page is not accessible. Status code: {object_response.status_code}")
             return None
     else:
-        print("Film not found.")
+        print("Object not found on the search page.")
         return None
 
 def get_film_stream(film_name):
     try:
-        url = get_film_url(film_name)
+        url = get_html_url(film_name)
         if not url:
             return {"status": "error", "message": "URL not found"}
 
@@ -92,6 +136,9 @@ def get_film_stream(film_name):
         return {"status": "error", "message": str(e)}
 
 
-film_name = "The Substance"
-urls = get_film_stream(film_name)
-print(urls)
+# film_name = "The Substance"
+# urls = get_film_stream(film_name)
+# print(urls)
+
+result = get_html_url("Sans famille / An Orphan's Tale")
+print(result)

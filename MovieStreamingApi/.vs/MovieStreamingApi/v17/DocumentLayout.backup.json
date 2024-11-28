@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "C:\\Users\\Delya\\gitgit\\StreamingMovieApi\\MovieStreamingApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\delya\\gitgit\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\delya\\gitgit\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
       "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
     },
@@ -21,6 +17,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\delya\\gitgit\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\endpoints\\movieendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\endpoints\\movieendpoints.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\delya\\gitgit\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|solutionrelative:moviestreamingapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C852567C-E84C-499C-81FE-A310B97367AB}|MovieStreamingApi\\MovieStreamingApi.csproj|c:\\users\\delya\\gitgit\\streamingmovieapi\\moviestreamingapi\\moviestreamingapi\\data\\models\\movie.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -42,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -58,7 +58,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "MoviesResponce.cs",
               "DocumentMoniker": "C:\\Users\\Delya\\gitgit\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Data\\Responces\\MoviesResponce.cs",
               "RelativeDocumentMoniker": "MovieStreamingApi\\Data\\Responces\\MoviesResponce.cs",
@@ -66,11 +66,12 @@
               "RelativeToolTip": "MovieStreamingApi\\Data\\Responces\\MoviesResponce.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T08:27:52.809Z"
+              "WhenOpened": "2024-11-24T08:27:52.809Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "MovieEndpoints.cs",
               "DocumentMoniker": "C:\\Users\\Delya\\gitgit\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Endpoints\\MovieEndpoints.cs",
               "RelativeDocumentMoniker": "MovieStreamingApi\\Endpoints\\MovieEndpoints.cs",
@@ -78,11 +79,12 @@
               "RelativeToolTip": "MovieStreamingApi\\Endpoints\\MovieEndpoints.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAgwCMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T08:27:52.816Z"
+              "WhenOpened": "2024-11-24T08:27:52.816Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "MovieService.cs",
               "DocumentMoniker": "C:\\Users\\Delya\\gitgit\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Services\\MovieService.cs",
               "RelativeDocumentMoniker": "MovieStreamingApi\\Services\\MovieService.cs",
@@ -90,11 +92,12 @@
               "RelativeToolTip": "MovieStreamingApi\\Services\\MovieService.cs",
               "ViewState": "AgIAAB0AAAAAAAAAAAAqwDUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T08:27:52.819Z"
+              "WhenOpened": "2024-11-24T08:27:52.819Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": ".gitignore",
               "DocumentMoniker": "C:\\Users\\Delya\\gitgit\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\.gitignore",
               "RelativeDocumentMoniker": "MovieStreamingApi\\.gitignore",
@@ -107,7 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Delya\\gitgit\\StreamingMovieApi\\MovieStreamingApi\\MovieStreamingApi\\Program.cs",
               "RelativeDocumentMoniker": "MovieStreamingApi\\Program.cs",
@@ -128,7 +131,8 @@
               "RelativeToolTip": "MovieStreamingApi\\Data\\Models\\Movie.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T08:27:52.826Z"
+              "WhenOpened": "2024-11-24T08:27:52.826Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -140,7 +144,8 @@
               "RelativeToolTip": "MovieStreamingApi\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-24T08:27:52.829Z"
+              "WhenOpened": "2024-11-24T08:27:52.829Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -152,7 +157,8 @@
               "RelativeToolTip": "MovieStreamingApi\\Properties\\launchSettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-24T08:27:52.835Z"
+              "WhenOpened": "2024-11-24T08:27:52.835Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
