@@ -92,19 +92,17 @@ def get_film_stream(film_name):
 
             for quality in qualities:
                 try:
-                    # Получаем объект потока
                     stream = rezka.getStream(translation=translator_name) if translator_name else rezka.getStream()
                     video_url = stream(quality) if callable(stream) else None
 
                     if video_url:
                         stream_urls[quality] = video_url
 
-                        # Проверяем наличие субтитров только для "Оригинал (+субтитры)"
                         if translator_name == "Оригинал (+субтитры)" and hasattr(stream, "subtitles") and stream.subtitles:
                             subtitles = stream.subtitles
                             subtitles_info = {
-                                "keys": subtitles.keys,  # Доступные языки субтитров
-                                "subtitles": subtitles.subtitles,  # Подробная информация о субтитрах
+                                "keys": subtitles.keys,
+                                "subtitles": subtitles.subtitles,
                             }
                 except Exception as e:
                     print(f"Error fetching quality {quality}: {e}")
@@ -214,8 +212,6 @@ def get_serial_stream(serial_name):
 
     except Exception as e:
         return {"status": "error", "message": str(e)}
-
-
 
 
 # serial_name = "Game of Thrones"
