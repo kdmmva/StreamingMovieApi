@@ -1,11 +1,11 @@
 ﻿using MovieStreamingApi.Data.Models;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
-namespace MovieStreamingApi.Data.Responces
+namespace MovieStreamingApi.Data.Responses
 {
     public class MoviesResponse
     {
-        [JsonProperty("results")]
+        [JsonPropertyName("results")]
         public List<Movie>? Results { get; set; }
     }
 }

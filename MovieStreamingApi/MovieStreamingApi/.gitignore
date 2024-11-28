@@ -1,29 +1,56 @@
-#vs
+# Ignore Visual Studio and VS Code specific files
 .vs/
 .vscode/
 *.user
 *.suo
 *.sln.ide
 
-# User-specific files (MonoDevelop/Xamarin Studio)
+# Ignore Visual Studio specific files and folders
+.vs/
+*.vsidx
+
+# Ignore MonoDevelop/Xamarin Studio specific files
 *.userprefs
 
-#.NET
+# Ignore build output directories and temporary files
 bin/
 Bin/
 obj/
 Obj/
 build/
 bld/
+*.cache
+
+# Ignore compiled files
 *.dll
 *.exe
 *.pdb
-*.cache
-
 *.ilk
 *.meta
 *.obj
 
-#system
+# Ignore system files
 Thumbs.db
+.DS_Store
+*.log
 
+# Ignore lock files for dependencies (can be committed for consistency in some projects)
+*.lock
+
+# Ignore application runtime files
+logs/
+tmp/
+temp/
+*.pid
+*.state
+
+# Include project-specific files that should not be ignored
+!*.csproj
+!*.sln
+!*.config
+!web.config
+!appsettings.json
+!appsettings.*.json
+
+# Allow tracked files to override ignore rules
+!!.gitignore

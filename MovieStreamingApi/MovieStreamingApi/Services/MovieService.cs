@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using MovieStreamingApi.Data.Models;
-using MovieStreamingApi.Data.Responces;
+using MovieStreamingApi.Data.Responses;
 
 namespace MovieStreamingApi.Services
 {
