@@ -119,99 +119,85 @@ def get_film_stream(film_name):
 
 def get_serial_stream(serial_name):
     try:
-        url = get_html_url(serial_name)
-        if not url:
+        # Получаем URL объекта
+        result = get_html_url(serial_name)
+        if not result or 'url' not in result:
             return {"status": "error", "message": "URL not found"}
 
+        url = result['url']
+
+        # Создаем объект API на основе URL
         rezka = HdRezkaApi(url)
 
         available_translators = rezka.translators
-        if not isinstance(available_translators, list):
-            print(f"Unexpected type for translators: {type(available_translators)}")
-            return {"status": "error", "message": "Invalid translators format"}
 
-        if "Дубляж" not in available_translators:
-            return {"status": "error", "message": "Translator 'Дубляж' not found"}
+        # Выбираем переводчик
+        translator_name = "Оригинал (+субтитры)"  # Можно заменить на индекс или другой переводчик
+        if translator_name not in available_translators:
+            return {"status": "error", "message": f"Translator '{translator_name}' not found"}
 
-        current_translator = "Дубляж"
+        all_season_streams = {}
 
-        qualities = ["360p", "480p", "720p", "1080p", "1080p Ultra"]
-        all_stream_urls = {}
+        # Перебираем сезоны
+        season_number = 1
+        while True:
+            try:
+                print(f"Processing season {season_number}...")
 
-        seasons = rezka.seasons
-        if not isinstance(seasons, list):
-            print(f"Unexpected type for seasons: {type(seasons)}")
-            return {"status": "error", "message": "Invalid seasons format"}
+                # Получаем потоки для текущего сезона
+                season_streams_generator = rezka.getSeasonStreams(
+                    season=season_number,
+                    translation=translator_name,
+                    ignore=True,
+                    progress=lambda current, total: print(f"Season {season_number} progress: {current}/{total}")
+                )
 
-        if not seasons:
-            return {"status": "error", "message": "No seasons found"}
+                # Преобразуем генератор в словарь
+                season_streams = dict(season_streams_generator)
 
-        for season in seasons:
-            all_stream_urls[season] = {}
-            episodes = rezka.getEpisodes(season)
+                if not season_streams:
+                    print(f"No streams found for season {season_number}. Stopping.")
+                    break
 
-            if not isinstance(episodes, list):
-                print(f"Unexpected type for episodes: {type(episodes)}")
-                continue
+                # Преобразуем данные потоков в удобный формат
+                all_season_streams[season_number] = {
+                    episode: {
+                        quality: stream(quality)
+                        for quality in ["360p", "480p", "720p", "1080p", "1080p Ultra"]
+                        if callable(stream)
+                    }
+                    for episode, stream in season_streams.items()
+                }
 
-            if not episodes:
-                print(f"No episodes found for season {season}")
-                continue
+                season_number += 1
 
-            for episode in episodes:
-                all_stream_urls[season][episode] = {}
-                for quality in qualities:
-                    try:
-                        stream_function = rezka.getStream(
-                            translation=current_translator,
-                            season=season,
-                            episode=episode
-                        )
+            except Exception as e:
+                print(f"Error processing season {season_number}: {e}")
+                break
 
-                        if not callable(stream_function):
-                            print(f"Unexpected type for stream_function: {type(stream_function)}")
-                            continue
-
-                        stream_url = stream_function(quality)
-
-                        if not isinstance(stream_url, str):
-                            print(f"Unexpected type for stream_url: {type(stream_url)}")
-                            continue
-
-                        all_stream_urls[season][episode][quality] = stream_url
-                    except Exception as e:
-                        print(f"Error fetching S{season}E{episode} quality {quality}: {e}")
-                        continue
-
-        if not all_stream_urls:
+        if not all_season_streams:
             return {"status": "error", "message": "No streams available"}
 
         return {
             "status": "success",
-            "translator": current_translator,
-            "streams": all_stream_urls
+            "type": "Serial",
+            "translator": translator_name,
+            "streams": all_season_streams
         }
 
     except Exception as e:
         return {"status": "error", "message": str(e)}
 
 
-serial_name = "Культ"
 
-result = get_serial_stream("serial_name")
-if result["status"] == "success":
-    for season, episodes in result["streams"].items():
-        print(f"Season {season}:")
-        for episode, qualities in episodes.items():
-            print(f"  Episode {episode}:")
-            for quality, url in qualities.items():
-                print(f"    {quality}: {url}")
-else:
-    print(f"Error: {result['message']}")
+# serial_name = "Sans famille / An Orphan's Tale"
 
+result = get_serial_stream("Game of Thrones")
+
+print(result)
 # film_name = "The Substance"
 # urls = get_film_stream(film_name)
 # print(urls)
 
-# result = get_html_url("Sans famille / An Orphan's Tale")
-# print(result)
+result = get_html_url("Sans famille / An Orphan's Tale")
+print(result)
