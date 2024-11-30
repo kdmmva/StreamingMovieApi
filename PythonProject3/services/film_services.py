@@ -2,7 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import quote_plus
 from HdRezkaApi import *
-import json
+from googletrans import Translator
+from difflib import SequenceMatcher
+
+translator = Translator()
 
 def get_html_url(object_name):
     query = quote_plus(object_name)
@@ -25,6 +28,9 @@ def get_html_url(object_name):
         object_response = requests.get(obj_url, headers=headers)
         if object_response.status_code == 200:
             object_soup = BeautifulSoup(object_response.text, 'html.parser')
+
+            description_tag = object_soup.find('div', class_='b-post__description_text')
+            rezka_description = description_tag.get_text(strip=True) if description_tag else ""
 
             is_serial = False
 
@@ -49,7 +55,8 @@ def get_html_url(object_name):
             obj_type = 'Serial' if is_serial else 'Movie'
             return {
                 'url': obj_url,
-                'type': obj_type
+                'type': obj_type,
+                'description': rezka_description
             }
         else:
             print(f"Object page is not accessible. Status code: {object_response.status_code}")
@@ -57,6 +64,12 @@ def get_html_url(object_name):
     else:
         print("Object not found on the search page.")
         return None
+
+def compare_descriptions(client_description, rezka_description):
+    translated_client_description = translator.translate(client_description, src='auto', dest='ru').text
+
+    similarity = SequenceMatcher(None, translated_client_description, rezka_description).ratio()
+    return similarity
 
 def get_film_stream(film_name):
     try:

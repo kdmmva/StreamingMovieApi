@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from services.film_services import get_film_stream
+from services.film_services import get_html_url,compare_descriptions
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -10,32 +10,29 @@ def generate_movie_url():
     try:
         data = request.json
         movie_title = data.get('title')
+        client_description = data.get('description')
 
-        if not movie_title:
-            return jsonify({"error": "Title is required"}), 400
+        if not movie_title or not client_description:
+            return jsonify({"error": "Title and description are required"}), 400
 
-        result = get_film_stream(movie_title)
+        rezka_result = get_html_url(movie_title)
+        if not rezka_result:
+            return jsonify({"error": "Could not find the movie on Rezka"}), 404
 
-        if result["status"] == "error":
-            return jsonify({"error": result["message"]}), 400
+        rezka_description = rezka_result['description']
+        similarity = compare_descriptions(client_description, rezka_description)
 
-        combined_streams = [
-            {
-                "translator": result["translator1"],
-                "urls": result["stream_urls1"]
-            },
-            {
-                "translator": result["translator2"],
-                "urls": result["stream_urls2"]
-            }
-        ]
+        if similarity < 0.5:
+            return jsonify({"error": "Description does not match"}), 400
 
-        return jsonify({"streams": combined_streams}), 200
+        return jsonify({
+            "url": rezka_result['url'],
+            "type": rezka_result['type'],
+            "similarity": similarity
+        }), 200
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
