@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from services.film_services import get_html_url,compare_descriptions,get_film_stream,get_serial_stream
+from services.film_services import get_html_url,get_film_stream,get_serial_stream
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -20,7 +20,7 @@ def generate_movie_url():
             return jsonify({"error": "Could not find the movie on Rezka"}), 404
 
         rezka_description = rezka_result['description']
-        similarity = compare_descriptions(client_description, rezka_description)
+        # similarity = compare_descriptions(client_description, rezka_description)
 
         # if similarity < 0.5:
         #     return jsonify({"error": "Description does not match"}), 400
@@ -38,7 +38,6 @@ def generate_movie_url():
 
         return jsonify({
             "type": rezka_result['type'],
-            "similarity": similarity,
             "streams": stream_result
         }), 200
 

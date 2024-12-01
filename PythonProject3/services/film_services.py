@@ -3,9 +3,6 @@ from bs4 import BeautifulSoup
 from urllib.parse import quote_plus
 from HdRezkaApi import *
 from deep_translator import GoogleTranslator
-from difflib import SequenceMatcher
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
 
 def get_html_url(object_name):
     query = quote_plus(object_name)
@@ -69,15 +66,15 @@ def get_html_url(object_name):
 #     similarity = SequenceMatcher(None, translated_client_description, rezka_description).ratio()
 #     return similarity
 
-def compare_descriptions(client_desc, rezka_desc):
-    translated_client_description = GoogleTranslator(source="auto", target="ru").translate(client_desc)
-
-    vectorizer = TfidfVectorizer().fit_transform([translated_client_description, rezka_desc])
-    vectors = vectorizer.toarray()
-
-    similarity_matrix = cosine_similarity(vectors)
-
-    return similarity_matrix[0, 1]
+# def compare_descriptions(client_desc, rezka_desc):
+#     translated_client_description = GoogleTranslator(source="auto", target="ru").translate(client_desc)
+#
+#     vectorizer = TfidfVectorizer().fit_transform([translated_client_description, rezka_desc])
+#     vectors = vectorizer.toarray()
+#
+#     similarity_matrix = cosine_similarity(vectors)
+#
+#     return similarity_matrix[0, 1]
 
 def get_film_stream(film_name):
     try:
