@@ -2,10 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import quote_plus
 from HdRezkaApi import *
-from googletrans import Translator
+from deep_translator import GoogleTranslator
 from difflib import SequenceMatcher
-
-translator = Translator()
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 def get_html_url(object_name):
     query = quote_plus(object_name)
@@ -65,11 +65,19 @@ def get_html_url(object_name):
         print("Object not found on the search page.")
         return None
 
-def compare_descriptions(client_description, rezka_description):
-    translated_client_description = translator.translate(client_description, src='auto', dest='ru').text
+# def compare_descriptions(client_description, rezka_description):
+#     similarity = SequenceMatcher(None, translated_client_description, rezka_description).ratio()
+#     return similarity
 
-    similarity = SequenceMatcher(None, translated_client_description, rezka_description).ratio()
-    return similarity
+def compare_descriptions(client_desc, rezka_desc):
+    translated_client_description = GoogleTranslator(source="auto", target="ru").translate(client_desc)
+
+    vectorizer = TfidfVectorizer().fit_transform([translated_client_description, rezka_desc])
+    vectors = vectorizer.toarray()
+
+    similarity_matrix = cosine_similarity(vectors)
+
+    return similarity_matrix[0, 1]
 
 def get_film_stream(film_name):
     try:
@@ -233,9 +241,9 @@ def get_serial_stream(serial_name):
 
 # print(result)
 
-film_name = "The Substance"
-urls = get_film_stream(film_name)
-print(urls)
+# film_name = "The Substance"
+# urls = get_film_stream(film_name)
+# print(urls)
 
 # result = get_html_url("Sans famille / An Orphan's Tale")
 # print(result)

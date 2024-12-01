@@ -22,11 +22,12 @@ def generate_movie_url():
         rezka_description = rezka_result['description']
         similarity = compare_descriptions(client_description, rezka_description)
 
-        if similarity < 0.5:
-            return jsonify({"error": "Description does not match"}), 400
+        # if similarity < 0.5:
+        #     return jsonify({"error": "Description does not match"}), 400
 
         if rezka_result['type'] == 'Movie':
             stream_result = get_film_stream(movie_title)
+
         elif rezka_result['type'] == 'Serial':
             stream_result = get_serial_stream(movie_title)
         else:
@@ -37,7 +38,6 @@ def generate_movie_url():
 
         return jsonify({
             "type": rezka_result['type'],
-            "url": rezka_result['url'],
             "similarity": similarity,
             "streams": stream_result
         }), 200
