@@ -11,7 +11,7 @@ def get_html_url(object_name):
     query = quote_plus(object_name)
     search_url = f'https://rezka.ag/search/?do=search&subaction=search&q={query}'
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36'
     }
 
     response = requests.get(search_url, headers=headers)
